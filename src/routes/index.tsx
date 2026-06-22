@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Package, Settings, Building2, Wrench, Sun, Factory, Warehouse, Truck,
   HardHat, Network, Users, Award, ClipboardList, Headphones, ShieldCheck,
