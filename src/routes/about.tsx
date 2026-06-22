@@ -109,15 +109,12 @@ function About() {
         <div className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
           <Link to="/"><Logo light /></Link>
           <nav className="hidden items-center gap-7 text-sm text-white/90 lg:flex">
-            {nav.map((n) => (
-              <a
-                key={n.label}
-                href="#"
-                className={`transition hover:text-gold ${n.active ? "border-b-2 border-gold pb-1 text-gold" : ""}`}
-              >
-                {n.label}{n.caret && " ▾"}
-              </a>
-            ))}
+            {nav.map((n) => {
+              const to = n.label === "Solutions" ? "/solutions" : n.label === "Industries" ? "/industries" : n.label === "Home" ? "/" : null;
+              const cls = `transition hover:text-gold ${n.active ? "border-b-2 border-gold pb-1 text-gold" : ""}`;
+              if (to) return <Link key={n.label} to={to} className={cls}>{n.label}</Link>;
+              return <a key={n.label} href="#" className={cls}>{n.label}{n.caret && " ▾"}</a>;
+            })}
           </nav>
           <button className="inline-flex items-center gap-2 rounded-md border-2 border-gold px-4 py-2 text-sm font-semibold text-gold transition hover:bg-gold hover:text-navy-deep">
             Request Quote <ArrowRight className="h-4 w-4" />
