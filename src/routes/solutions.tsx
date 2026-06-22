@@ -127,7 +127,8 @@ function SolutionsPage() {
               if (n === "Home") return <Link key={n} to="/" className={cls}>{n}</Link>;
               if (n === "About Us") return <Link key={n} to="/about" className={cls}>{n}</Link>;
               if (n === "Solutions") return <Link key={n} to="/solutions" className={cls}>{n}</Link>;
-              return <a key={n} href="#" className={cls}>{n}{["Industries","Resources"].includes(n) && " ▾"}</a>;
+              if (n === "Industries") return <Link key={n} to="/industries" className={cls}>{n}</Link>;
+              return <a key={n} href="#" className={cls}>{n}{n === "Resources" && " ▾"}</a>;
             })}
           </nav>
           <button className="inline-flex items-center gap-2 rounded-md bg-gold px-4 py-2.5 text-sm font-semibold text-navy-deep hover:bg-gold-soft">
