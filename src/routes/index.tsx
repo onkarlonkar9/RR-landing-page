@@ -149,8 +149,10 @@ function Index() {
             {nav.map((n) =>
               n === "About Us" ? (
                 <Link key={n} to="/about" className="transition hover:text-gold">{n}</Link>
+              ) : n === "Solutions" ? (
+                <Link key={n} to="/solutions" className="transition hover:text-gold">{n}</Link>
               ) : (
-                <a key={n} href="#" className="transition hover:text-gold">{n}{["Solutions","Industries","Resources"].includes(n) && " ▾"}</a>
+                <a key={n} href="#" className="transition hover:text-gold">{n}{["Industries","Resources"].includes(n) && " ▾"}</a>
               )
             )}
           </nav>
