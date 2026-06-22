@@ -37,7 +37,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const nav = ["Solutions", "Industries", "Projects", "Resources", "RFQ", "Contact"];
+const nav = ["Solutions", "Industries", "Projects", "Resources", "RFQ", "About Us", "Contact"];
 
 const solutions = [
   { img: solPackaging, icon: Package, title: "Packaging Materials", desc: "High quality packaging solutions for industrial and commercial needs." },
