@@ -146,9 +146,13 @@ function Index() {
         <div className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
           <Logo light />
           <nav className="hidden items-center gap-7 text-sm text-white/90 lg:flex">
-            {nav.map((n) => (
-              <a key={n} href="#" className="transition hover:text-gold">{n}{["Solutions","Industries","Resources"].includes(n) && " ▾"}</a>
-            ))}
+            {nav.map((n) =>
+              n === "About Us" ? (
+                <Link key={n} to="/about" className="transition hover:text-gold">{n}</Link>
+              ) : (
+                <a key={n} href="#" className="transition hover:text-gold">{n}{["Solutions","Industries","Resources"].includes(n) && " ▾"}</a>
+              )
+            )}
           </nav>
           <button className="inline-flex items-center gap-2 rounded-md bg-gold px-4 py-2.5 text-sm font-semibold text-navy-deep hover:bg-gold-soft">
             <Calendar className="h-4 w-4" /> Schedule Consultation
