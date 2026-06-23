@@ -118,12 +118,12 @@ function IndustriesPage() {
               </div>
             </Link>
             <nav className="hidden items-center gap-7 text-sm lg:flex">
-              {nav.map((n) => {
-                const to = n === "Home" ? "/" : n === "Solutions" ? "/solutions" : n === "About Us" ? "/about" : n === "Industries" ? "/industries" : null;
-                const active = n === "Industries";
-                const cls = `transition hover:text-[color:var(--gold)] ${active ? "text-[color:var(--gold)] font-semibold" : ""}`;
-                return to ? <Link key={n} to={to} className={cls}>{n}</Link> : <a key={n} href="#" className={cls}>{n}</a>;
-              })}
+            {nav.map((n) => {
+              const to = n === "Home" ? "/" : n === "Solutions" ? "/solutions" : n === "About Us" ? "/about" : n === "Industries" ? "/industries" : n === "Contact" ? "/contact" : null;
+              const active = n === "Industries";
+              const cls = `transition hover:text-[color:var(--gold)] ${active ? "text-[color:var(--gold)] font-semibold" : ""}`;
+              return to ? <Link key={n} to={to} className={cls}>{n}</Link> : <a key={n} href="#" className={cls}>{n}</a>;
+            })}
             </nav>
           </header>
 
