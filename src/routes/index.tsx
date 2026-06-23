@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import {
   Package, Settings, Building2, Wrench, Sun, Factory, Warehouse, Truck,
   HardHat, Network, Users, Award, ClipboardList, Headphones, ShieldCheck,
@@ -24,6 +24,8 @@ import projManufacturing from "@/assets/proj-manufacturing.jpg";
 import projWarehouse from "@/assets/proj-warehouse.jpg";
 import projSolar from "@/assets/proj-solar.jpg";
 import projMep from "@/assets/proj-mep.jpg";
+import { BrandLogo } from "@/components/brand-logo";
+import { SiteNav } from "@/components/site-nav";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -36,8 +38,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
-
-const nav = ["Solutions", "Industries", "Projects", "Resources", "RFQ", "About Us", "Contact"];
 
 const solutions = [
   { img: solPackaging, icon: Package, title: "Packaging Materials", desc: "High quality packaging solutions for industrial and commercial needs." },
@@ -96,27 +96,6 @@ const stats = [
   { icon: Headphones, n: "24/7", l: "Customer Support" },
 ];
 
-const rfqFeatures = [
-  { icon: Clock, title: "Quick & Easy Inquiry", desc: "Submit your requirements in minutes" },
-  { icon: Briefcase, title: "Expert Evaluation", desc: "Our experts will analyze your requirement" },
-  { icon: Award, title: "Best Competitive Quote", desc: "Receive the best quote within 24 hours" },
-  { icon: ShieldCheck, title: "Secure & Confidential", desc: "Your information is 100% safe with us" },
-];
-
-function Logo({ light = false }: { light?: boolean }) {
-  return (
-    <div className="flex items-center gap-2">
-      <div className="flex h-11 w-11 items-center justify-center rounded-md border-2 border-gold bg-transparent">
-        <span className="text-gold font-display font-extrabold text-lg tracking-tight">RR</span>
-      </div>
-      <div>
-        <div className={`font-display font-bold leading-tight text-sm ${light ? "text-white" : "text-navy"}`}>RR ENTERPRISES</div>
-        <div className="text-[10px] text-gold leading-tight">One Partner. Multiple Solutions. Endless Possibilities.</div>
-      </div>
-    </div>
-  );
-}
-
 function GoldBtn({ children, outline = false }: { children: React.ReactNode; outline?: boolean }) {
   if (outline) {
     return (
@@ -144,14 +123,8 @@ function Index() {
 
         {/* nav */}
         <div className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          <Logo light />
-          <nav className="hidden items-center gap-7 text-sm text-white/90 lg:flex">
-            {nav.map((n) => {
-              const to = n === "About Us" ? "/about" : n === "Solutions" ? "/solutions" : n === "Industries" ? "/industries" : n === "Contact" ? "/contact" : null;
-              if (to) return <Link key={n} to={to} className="transition hover:text-gold">{n}</Link>;
-              return <a key={n} href="#" className="transition hover:text-gold">{n}{n === "Resources" && " ▾"}</a>;
-            })}
-          </nav>
+          <BrandLogo />
+          <SiteNav active="Home" />
           <button className="inline-flex items-center gap-2 rounded-md bg-gold px-4 py-2.5 text-sm font-semibold text-navy-deep hover:bg-gold-soft">
             <Calendar className="h-4 w-4" /> Schedule Consultation
           </button>
@@ -170,7 +143,6 @@ function Index() {
             End-to-end industrial sourcing, packaging, construction and infrastructure solutions across India.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <GoldBtn>Request Quote</GoldBtn>
             <GoldBtn outline>Schedule Consultation</GoldBtn>
           </div>
 
@@ -342,73 +314,6 @@ function Index() {
         </div>
       </section>
 
-      {/* RFQ */}
-      <section className="bg-secondary py-16">
-        <div className="mx-auto grid max-w-7xl gap-8 px-6 lg:grid-cols-[1fr_2fr]">
-          <div>
-            <h2 className="font-display text-2xl font-bold text-navy">SMART RFQ – GET BEST QUOTE IN 24 HOURS <Check className="inline h-5 w-5 text-gold" /></h2>
-            <ul className="mt-6 space-y-4">
-              {rfqFeatures.map((f) => (
-                <li key={f.title} className="flex items-start gap-3">
-                  <div className="flex h-9 w-9 flex-none items-center justify-center rounded-md bg-white text-gold ring-1 ring-border">
-                    <f.icon className="h-5 w-5" strokeWidth={1.5} />
-                  </div>
-                  <div>
-                    <div className="text-sm font-bold text-navy">{f.title}</div>
-                    <div className="text-xs text-muted-foreground">{f.desc}</div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <form className="rounded-md bg-white p-6 shadow-sm ring-1 ring-border">
-            <div className="grid gap-4 md:grid-cols-3">
-              {[
-                ["Company Name *", "input"],
-                ["Contact Person *", "input"],
-                ["Email *", "input"],
-                ["Phone Number *", "input"],
-                ["Industry *", "select"],
-                ["Requirement Type *", "select"],
-                ["Product Category *", "select"],
-                ["Estimated Quantity", "input"],
-                ["Location *", "input"],
-              ].map(([label, type]) => (
-                <label key={label} className="text-xs">
-                  <span className="font-semibold text-navy">{label}</span>
-                  {type === "select" ? (
-                    <select className="mt-1 w-full rounded border border-input bg-white px-3 py-2 text-sm">
-                      <option>Select {String(label).replace(" *","").replace("Requirement Type","Type")}</option>
-                    </select>
-                  ) : (
-                    <input className="mt-1 w-full rounded border border-input bg-white px-3 py-2 text-sm" />
-                  )}
-                </label>
-              ))}
-            </div>
-            <div className="mt-4 grid gap-4 md:grid-cols-2">
-              <label className="text-xs">
-                <span className="font-semibold text-navy">Message / Requirement Details</span>
-                <textarea rows={4} placeholder="Write your requirement..." className="mt-1 w-full rounded border border-input bg-white px-3 py-2 text-sm" />
-              </label>
-              <label className="text-xs">
-                <span className="font-semibold text-navy">Upload BOQ / File</span>
-                <div className="mt-1 rounded border border-input bg-white px-3 py-2 text-sm">
-                  <input type="file" className="text-xs" />
-                </div>
-                <span className="mt-1 block text-[10px] text-muted-foreground">Max file size: 10MB (PDF, DOC, XLS, DWG)</span>
-              </label>
-            </div>
-            <div className="mt-5 text-center">
-              <button type="button" className="inline-flex items-center gap-2 rounded-md bg-gold px-7 py-2.5 text-sm font-bold text-navy-deep hover:bg-gold-soft">
-                Submit RFQ <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
-          </form>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="relative overflow-hidden bg-navy py-10 text-white">
         <div className="absolute inset-0 opacity-20"><img src={hero} alt="" className="h-full w-full object-cover" /></div>
@@ -418,7 +323,6 @@ function Index() {
             <p className="text-sm text-white/80">Let's build something great together.</p>
           </div>
           <div className="flex gap-3">
-            <GoldBtn>Request Quote</GoldBtn>
             <GoldBtn outline>Talk to Our Experts</GoldBtn>
           </div>
         </div>
@@ -428,7 +332,7 @@ function Index() {
       <footer className="bg-navy-deep py-14 text-white/85">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-1">
-            <Logo light />
+            <BrandLogo className="h-16" />
             <p className="mt-5 text-xs text-white/70">Your trusted partner for industrial procurement, infrastructure solutions and sustainable growth.</p>
             <div className="mt-4 flex gap-2">
               {[Linkedin, Facebook, Instagram, Youtube].map((I, i) => (
@@ -438,7 +342,7 @@ function Index() {
           </div>
           <FooterCol title="SOLUTIONS" items={["Packaging Materials","Industrial Components","Construction Materials","PEB Structures","MEP Services","Solar Solutions"]} />
           <FooterCol title="INDUSTRIES" items={["Manufacturing","Warehousing","Logistics","Construction","Infrastructure","EPC Contractors"]} />
-          <FooterCol title="QUICK LINKS" items={["About Us","Projects","Resources","RFQ Portal","Vendor Portal","Contact Us"]} />
+          <FooterCol title="QUICK LINKS" items={["About Us","Projects","Resources","Vendor Portal","Contact Us"]} />
           <div>
             <h4 className="font-display text-sm font-bold text-white">CONTACT INFO</h4>
             <div className="mt-3 h-0.5 w-10 bg-gold" />
@@ -448,11 +352,6 @@ function Index() {
               <li className="flex gap-2"><Mail className="h-4 w-4 flex-none text-gold" /> info@rrenterprises.com</li>
               <li className="flex gap-2"><Globe className="h-4 w-4 flex-none text-gold" /> www.rrenterprises.com</li>
             </ul>
-            <h4 className="mt-6 font-display text-sm font-bold text-white">NEWSLETTER</h4>
-            <div className="mt-3 h-0.5 w-10 bg-gold" />
-            <p className="mt-3 text-xs text-white/70">Stay updated with our latest solutions and insights.</p>
-            <input placeholder="Enter your email" className="mt-3 w-full rounded border border-white/20 bg-transparent px-3 py-2 text-xs" />
-            <button className="mt-2 w-full rounded bg-gold py-2 text-xs font-bold text-navy-deep hover:bg-gold-soft">Subscribe</button>
           </div>
         </div>
         <div className="mx-auto mt-10 flex max-w-7xl flex-col items-center justify-between gap-2 border-t border-white/10 px-6 pt-5 text-xs text-white/60 md:flex-row">

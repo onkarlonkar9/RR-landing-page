@@ -10,6 +10,8 @@ import {
 import heroImg from "@/assets/about-hero.jpg";
 import warehouseAerial from "@/assets/about-warehouse-aerial.jpg";
 import directorImg from "@/assets/director-portrait.jpg";
+import { BrandLogo } from "@/components/brand-logo";
+import { SiteNav } from "@/components/site-nav";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -23,16 +25,6 @@ export const Route = createFileRoute("/about")({
   }),
   component: About,
 });
-
-const nav = [
-  { label: "Solutions", caret: true },
-  { label: "Industries", caret: true },
-  { label: "Projects" },
-  { label: "Resources", caret: true },
-  { label: "RFQ" },
-  { label: "About Us", active: true },
-  { label: "Contact" },
-];
 
 const whoWeAre = [
   { icon: ShieldCheck, title: "Quality Assured Products", desc: "Sourced from trusted global manufacturers" },
@@ -48,17 +40,6 @@ const coreValues = [
   { icon: Lightbulb, title: "Innovation", desc: "Continuously improving and creating value" },
   { icon: Handshake, title: "Partnership", desc: "Building long-term relationships" },
   { icon: Leaf, title: "Sustainability", desc: "Committed to a better tomorrow" },
-];
-
-const journey = [
-  { y: "2018", t: "Company Founded" },
-  { y: "2019", t: "Packaging Division Launch" },
-  { y: "2020", t: "Industrial Components Expansion" },
-  { y: "2021", t: "Construction Materials Division" },
-  { y: "2022", t: "PEB & MEP Services Launch" },
-  { y: "2023", t: "Strengthened Pan India Network" },
-  { y: "2024", t: "Solar Solutions Expansion" },
-  { y: "Future", t: "Building India's Industrial Future" },
 ];
 
 const whyChoose = [
@@ -81,20 +62,6 @@ const stats = [
   { icon: Handshake, n: "Pan India", l: "Service Network" },
 ];
 
-function Logo({ light = false }: { light?: boolean }) {
-  return (
-    <div className="flex items-center gap-2">
-      <div className="flex h-11 w-11 items-center justify-center rounded-md border-2 border-gold">
-        <span className="font-display text-lg font-extrabold tracking-tight text-gold">RR</span>
-      </div>
-      <div>
-        <div className={`font-display text-sm font-bold leading-tight ${light ? "text-white" : "text-navy"}`}>RR ENTERPRISES</div>
-        <div className="text-[9px] leading-tight text-gold">One Partner. Multiple Solutions. Endless Possibilities.</div>
-      </div>
-    </div>
-  );
-}
-
 function About() {
   return (
     <div className="min-h-screen bg-background">
@@ -107,18 +74,8 @@ function About() {
 
         {/* nav */}
         <div className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          <Link to="/"><Logo light /></Link>
-          <nav className="hidden items-center gap-7 text-sm text-white/90 lg:flex">
-            {nav.map((n) => {
-              const to = n.label === "Solutions" ? "/solutions" : n.label === "Industries" ? "/industries" : n.label === "Home" ? "/" : n.label === "Contact" ? "/contact" : null;
-              const cls = `transition hover:text-gold ${n.active ? "border-b-2 border-gold pb-1 text-gold" : ""}`;
-              if (to) return <Link key={n.label} to={to} className={cls}>{n.label}</Link>;
-              return <a key={n.label} href="#" className={cls}>{n.label}{n.caret && " ▾"}</a>;
-            })}
-          </nav>
-          <button className="inline-flex items-center gap-2 rounded-md border-2 border-gold px-4 py-2 text-sm font-semibold text-gold transition hover:bg-gold hover:text-navy-deep">
-            Request Quote <ArrowRight className="h-4 w-4" />
-          </button>
+          <Link to="/"><BrandLogo /></Link>
+          <SiteNav active="About Us" />
         </div>
 
         {/* hero content */}
@@ -243,34 +200,6 @@ function About() {
         </div>
       </section>
 
-      {/* JOURNEY */}
-      <section className="mx-auto max-w-7xl px-6 pb-20">
-        <div className="text-center">
-          <h2 className="font-display text-3xl font-bold tracking-wide text-navy">OUR JOURNEY</h2>
-          <div className="mx-auto mt-3 h-0.5 w-16 bg-gold" />
-        </div>
-        <div className="relative mt-14">
-          <button className="absolute left-0 top-6 flex h-10 w-10 items-center justify-center rounded-full bg-navy-deep text-white shadow-md">
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button className="absolute right-0 top-6 flex h-10 w-10 items-center justify-center rounded-full bg-navy-deep text-white shadow-md">
-            <ChevronRight className="h-5 w-5" />
-          </button>
-          <div className="mx-12 relative">
-            <div className="absolute left-0 right-0 top-3 h-0.5 bg-gold/40" />
-            <div className="relative grid grid-cols-4 gap-4 md:grid-cols-8">
-              {journey.map((j) => (
-                <div key={j.y} className="flex flex-col items-center text-center">
-                  <div className="h-6 w-6 rounded-full border-4 border-gold bg-white" />
-                  <div className="mt-3 font-display text-base font-bold text-gold">{j.y}</div>
-                  <div className="mt-1 text-xs text-navy">{j.t}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* WHY CHOOSE */}
       <section className="bg-navy-deep py-16 text-white">
         <div className="mx-auto max-w-7xl px-6">
@@ -345,9 +274,6 @@ function About() {
             <p className="mt-2 max-w-xl text-sm text-white/75">Partner with RR Enterprises for reliable, efficient and sustainable industrial solutions.</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <button className="inline-flex items-center gap-2 rounded-md bg-gold px-5 py-2.5 text-sm font-semibold text-navy-deep hover:bg-gold-soft">
-              Request Quote Now <ArrowRight className="h-4 w-4" />
-            </button>
             <button className="inline-flex items-center gap-2 rounded-md border border-white/80 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10">
               Talk To Our Experts <ArrowRight className="h-4 w-4" />
             </button>
@@ -359,7 +285,7 @@ function About() {
       <footer className="bg-navy-deep pt-14 pb-6 text-white">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-2 lg:grid-cols-6">
           <div className="lg:col-span-2">
-            <Logo light />
+            <BrandLogo className="h-16" />
             <p className="mt-4 max-w-xs text-xs text-white/70">
               Your trusted partner for industrial procurement, infrastructure solutions and sustainable growth.
             </p>
@@ -375,7 +301,7 @@ function About() {
             { h: "SOLUTIONS", items: ["Packaging Materials", "Industrial Components", "Construction Materials", "PEB Structures", "MEP Services", "Solar Solutions"] },
             { h: "INDUSTRIES", items: ["Manufacturing", "Warehousing", "Logistics", "Construction", "Infrastructure", "EPC Contractors"] },
             { h: "RESOURCES", items: ["Blogs", "Case Studies", "Whitepapers", "Downloads", "Guides", "News & Updates"] },
-            { h: "QUICK LINKS", items: ["About Us", "Projects", "RFQ Portal", "Careers", "Privacy Policy", "Terms & Conditions"] },
+            { h: "QUICK LINKS", items: ["About Us", "Projects",  "Careers", "Privacy Policy", "Terms & Conditions"] },
           ].map((col) => (
             <div key={col.h}>
               <div className="text-xs font-bold tracking-[0.15em] text-gold">{col.h}</div>

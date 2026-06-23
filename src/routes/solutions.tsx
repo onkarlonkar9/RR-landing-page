@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import {
   Package, Settings, Building2, Wrench, Sun, Factory, Warehouse, Truck,
   HardHat, Network, Users, Award, ClipboardList, Headphones, Check, X,
@@ -21,6 +21,8 @@ import pPipes from "@/assets/p-pipes.jpg";
 import projManufacturing from "@/assets/proj-manufacturing.jpg";
 import projWarehouse from "@/assets/proj-warehouse.jpg";
 import projSolar from "@/assets/proj-solar.jpg";
+import { BrandLogo } from "@/components/brand-logo";
+import { SiteNav } from "@/components/site-nav";
 
 export const Route = createFileRoute("/solutions")({
   head: () => ({
@@ -33,8 +35,6 @@ export const Route = createFileRoute("/solutions")({
   }),
   component: SolutionsPage,
 });
-
-const nav = ["Home", "About Us", "Solutions", "Industries", "Projects", "Resources", "Contact"];
 
 const heroSolutions = [
   { icon: Package, label: "Packaging Materials" },
@@ -79,20 +79,6 @@ const cases = [
   { img: projSolar, title: "Solar Project", location: "Rajasthan", challenge: "Need reliable solar EPC partner for large project", solution: "End-to-end solar solution with quality assurance", outcome: "40% energy cost saved" },
 ];
 
-function Logo({ light = false }: { light?: boolean }) {
-  return (
-    <div className="flex items-center gap-2">
-      <div className="flex h-11 w-11 items-center justify-center rounded-md border-2 border-gold bg-transparent">
-        <span className="text-gold font-display font-extrabold text-lg tracking-tight">RR</span>
-      </div>
-      <div>
-        <div className={`font-display font-bold leading-tight text-sm ${light ? "text-white" : "text-navy"}`}>RR ENTERPRISES</div>
-        <div className="text-[10px] text-gold leading-tight">One Partner. Multiple Solutions. Endless Possibilities.</div>
-      </div>
-    </div>
-  );
-}
-
 function GoldBtn({ children, outline = false }: { children: React.ReactNode; outline?: boolean }) {
   if (outline) {
     return (
@@ -119,22 +105,8 @@ function SolutionsPage() {
         </div>
 
         <div className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          <Logo light />
-          <nav className="hidden items-center gap-7 text-sm text-white/90 lg:flex">
-            {nav.map((n) => {
-              const active = n === "Solutions";
-              const cls = `transition hover:text-gold ${active ? "text-gold font-semibold border-b-2 border-gold pb-1" : ""}`;
-              if (n === "Home") return <Link key={n} to="/" className={cls}>{n}</Link>;
-              if (n === "About Us") return <Link key={n} to="/about" className={cls}>{n}</Link>;
-              if (n === "Solutions") return <Link key={n} to="/solutions" className={cls}>{n}</Link>;
-              if (n === "Industries") return <Link key={n} to="/industries" className={cls}>{n}</Link>;
-              if (n === "Contact") return <Link key={n} to="/contact" className={cls}>{n}</Link>;
-              return <a key={n} href="#" className={cls}>{n}{n === "Resources" && " ▾"}</a>;
-            })}
-          </nav>
-          <button className="inline-flex items-center gap-2 rounded-md bg-gold px-4 py-2.5 text-sm font-semibold text-navy-deep hover:bg-gold-soft">
-            Request Quote <FileText className="h-4 w-4" />
-          </button>
+          <BrandLogo />
+          <SiteNav active="Solutions" />
         </div>
 
         <div className="relative z-10 mx-auto grid max-w-7xl gap-10 px-6 pt-8 pb-20 lg:grid-cols-2">
@@ -147,7 +119,6 @@ function SolutionsPage() {
               End-to-end procurement, infrastructure and engineering solutions for modern industries.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <GoldBtn>Request Quote</GoldBtn>
               <GoldBtn outline>Explore Solutions</GoldBtn>
             </div>
 
@@ -311,85 +282,6 @@ function SolutionsPage() {
         </div>
       </section>
 
-      {/* WHY CHOOSE / RFQ */}
-      <section className="mx-auto max-w-7xl px-6 pb-16">
-        <h2 className="text-center font-display text-2xl font-bold tracking-wide text-navy">WHY CHOOSE RR ENTERPRISES</h2>
-        <div className="mx-auto mt-2 h-0.5 w-16 bg-gold" />
-
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
-          <div className="relative overflow-hidden rounded-lg bg-navy-deep p-8 text-white">
-            <h3 className="font-display text-2xl font-bold leading-tight">
-              One Partner.<br />Multiple Solutions.<br />Endless Possibilities.
-            </h3>
-            <div className="mt-8 grid grid-cols-3 gap-4 text-center">
-              {[
-                { icon: ShieldCheck, t: "Quality Assured", s: "Products" },
-                { icon: Truck, t: "On-time", s: "Delivery" },
-                { icon: Users, t: "Customer", s: "Satisfaction" },
-              ].map((x) => (
-                <div key={x.t}>
-                  <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-md bg-white/5 ring-1 ring-gold/30">
-                    <x.icon className="h-5 w-5 text-gold" strokeWidth={1.5} />
-                  </div>
-                  <div className="mt-2 text-xs font-semibold">{x.t}</div>
-                  <div className="text-[10px] text-white/70">{x.s}</div>
-                </div>
-              ))}
-            </div>
-            <div className="absolute -bottom-4 -left-4 h-20 w-20 rounded-tr-2xl bg-gold/30" />
-            <div className="absolute -bottom-2 left-10 h-2 w-32 bg-gold" />
-          </div>
-
-          <form className="rounded-lg bg-white p-6 shadow-sm ring-1 ring-border lg:col-span-2">
-            <div className="mb-4 grid grid-cols-2 overflow-hidden rounded-md border border-border text-center text-xs font-bold">
-              <div className="bg-gold py-2 text-navy-deep">RR ENTERPRISES</div>
-              <div className="bg-muted py-2 text-navy">TYPICAL SUPPLIER</div>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2">
-              {[
-                { l: "Company Name", ph: "Enter company name" },
-                { l: "Phone Number", ph: "Enter phone number" },
-              ].map(f => (
-                <div key={f.l}>
-                  <label className="text-xs font-semibold text-navy">{f.l}<span className="text-red-500">*</span></label>
-                  <input placeholder={f.ph} className="mt-1 w-full rounded border border-border bg-white px-3 py-2 text-sm" />
-                  <div className="mt-2 flex justify-around text-sm"><Check className="h-4 w-4 text-green-600" /><X className="h-4 w-4 text-red-500" /></div>
-                </div>
-              ))}
-              <div>
-                <label className="text-xs font-semibold text-navy">Requirement Type<span className="text-red-500">*</span></label>
-                <select className="mt-1 w-full rounded border border-border bg-white px-3 py-2 text-sm"><option>Select requirement</option></select>
-                <div className="mt-2 flex justify-around text-sm"><Check className="h-4 w-4 text-green-600" /><span className="text-xs text-muted-foreground">Limited</span></div>
-              </div>
-              <div>
-                <label className="text-xs font-semibold text-navy">Product / Solution<span className="text-red-500">*</span></label>
-                <select className="mt-1 w-full rounded border border-border bg-white px-3 py-2 text-sm"><option>Select product/solution</option></select>
-                <div className="mt-2 flex justify-around text-sm"><span className="text-xs text-navy">Extensive</span><span className="text-xs text-muted-foreground">Limited</span></div>
-              </div>
-              <div className="md:col-span-2">
-                <label className="text-xs font-semibold text-navy">Message / Requirement Details</label>
-                <textarea placeholder="Tell us about your requirement..." rows={3} className="mt-1 w-full rounded border border-border bg-white px-3 py-2 text-sm" />
-              </div>
-              <div className="md:col-span-2">
-                <label className="text-xs font-semibold text-navy">Upload BOQ / File</label>
-                <div className="mt-1 flex items-center gap-3 rounded border border-dashed border-border bg-muted/50 p-3 text-xs">
-                  <button type="button" className="rounded border border-border bg-white px-3 py-1.5 font-semibold text-navy">Choose File</button>
-                  <span className="text-muted-foreground">No file chosen</span>
-                </div>
-                <div className="mt-1 text-[10px] text-muted-foreground">Max file size: 10MB (PDF, DOC, XLS, DWG)</div>
-              </div>
-            </div>
-
-            <div className="mt-5 text-center">
-              <button type="submit" className="inline-flex items-center gap-2 rounded-md bg-gold px-8 py-3 text-sm font-bold text-navy-deep hover:bg-gold-soft">
-                Submit RFQ <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
-          </form>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="relative overflow-hidden bg-navy-deep py-12 text-white">
         <div className="absolute inset-0 opacity-20"><img src={hero} alt="" className="h-full w-full object-cover" /></div>
@@ -399,7 +291,6 @@ function SolutionsPage() {
             <p className="mt-1 text-sm text-white/80">Let's discuss how we can support your business growth.</p>
           </div>
           <div className="flex gap-3">
-            <GoldBtn>Request Quote</GoldBtn>
             <GoldBtn outline>Talk To Our Experts</GoldBtn>
           </div>
         </div>
@@ -409,7 +300,7 @@ function SolutionsPage() {
       <footer className="bg-[#0a1428] py-12 text-white/80">
         <div className="mx-auto grid max-w-7xl gap-8 px-6 md:grid-cols-2 lg:grid-cols-6">
           <div className="lg:col-span-2">
-            <Logo light />
+            <BrandLogo className="h-16" />
             <p className="mt-4 max-w-xs text-xs">Your trusted partner for industrial procurement, infrastructure solutions and sustainable growth.</p>
             <div className="mt-4 flex gap-2">
               {[Linkedin, Facebook, Instagram, Youtube].map((I, i) => (
@@ -420,7 +311,7 @@ function SolutionsPage() {
           {[
             { t: "SOLUTIONS", items: ["Packaging Materials","Industrial Components","Construction Materials","PEB Structures","MEP Services","Solar Solutions"] },
             { t: "INDUSTRIES", items: ["Manufacturing","Warehousing","Logistics","Construction","Infrastructure","EPC Contractors"] },
-            { t: "QUICK LINKS", items: ["About Us","Projects","Resources","RFQ Portal","Careers","Contact Us"] },
+            { t: "QUICK LINKS", items: ["About Us","Projects","Resources","Careers","Contact Us"] },
           ].map(col => (
             <div key={col.t}>
               <h4 className="mb-3 text-xs font-bold tracking-wider text-white">{col.t}</h4>

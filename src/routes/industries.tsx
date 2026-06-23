@@ -23,6 +23,8 @@ import pPipes from "@/assets/p-pipes.jpg";
 import projManufacturing from "@/assets/proj-manufacturing.jpg";
 import projWarehouse from "@/assets/proj-warehouse.jpg";
 import projMep from "@/assets/proj-mep.jpg";
+import { BrandLogo } from "@/components/brand-logo";
+import { SiteNav } from "@/components/site-nav";
 
 export const Route = createFileRoute("/industries")({
   head: () => ({
@@ -35,8 +37,6 @@ export const Route = createFileRoute("/industries")({
   }),
   component: IndustriesPage,
 });
-
-const nav = ["Home", "Solutions", "Industries", "Products", "Projects", "Resources", "About Us", "Contact"];
 
 const industries = [
   { img: iManu, icon: Factory, title: "Manufacturing", desc: "Solutions for production, equipment, maintenance and operational efficiency." },
@@ -110,21 +110,10 @@ function IndustriesPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-[color:var(--navy-deep)]/95 via-[color:var(--navy-deep)]/70 to-transparent" />
         <div className="relative z-10">
           <header className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-            <Link to="/" className="flex items-center gap-3">
-              <div className="grid h-11 w-11 place-items-center rounded-md bg-[color:var(--gold)] font-display text-lg font-bold text-[color:var(--navy-deep)]">RR</div>
-              <div className="leading-tight">
-                <div className="font-display text-sm font-bold tracking-wide">RR ENTERPRISES</div>
-                <div className="text-[10px] text-white/70">One Partner. Multiple Solutions. Endless Possibilities.</div>
-              </div>
+            <Link to="/">
+              <BrandLogo />
             </Link>
-            <nav className="hidden items-center gap-7 text-sm lg:flex">
-            {nav.map((n) => {
-              const to = n === "Home" ? "/" : n === "Solutions" ? "/solutions" : n === "About Us" ? "/about" : n === "Industries" ? "/industries" : n === "Contact" ? "/contact" : null;
-              const active = n === "Industries";
-              const cls = `transition hover:text-[color:var(--gold)] ${active ? "text-[color:var(--gold)] font-semibold" : ""}`;
-              return to ? <Link key={n} to={to} className={cls}>{n}</Link> : <a key={n} href="#" className={cls}>{n}</a>;
-            })}
-            </nav>
+            <SiteNav active="Industries" />
           </header>
 
           <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 pb-20 pt-10 lg:grid-cols-2">
@@ -139,9 +128,6 @@ function IndustriesPage() {
               <div className="mt-7 flex flex-wrap gap-3">
                 <a href="#our-industries" className="inline-flex items-center gap-2 rounded-md bg-[color:var(--gold)] px-5 py-3 text-sm font-semibold text-[color:var(--navy-deep)] hover:brightness-105">
                   Explore Industries <ArrowRight className="h-4 w-4" />
-                </a>
-                <a href="#cta" className="inline-flex items-center gap-2 rounded-md border border-white/30 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10">
-                  Request Consultation <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
             </div>
@@ -290,57 +276,6 @@ function IndustriesPage() {
         </div>
       </section>
 
-      {/* RFQ + EXPERT HELP */}
-      <section id="cta" className="mx-auto max-w-7xl px-6 py-20">
-        <div className="grid gap-8 lg:grid-cols-3">
-          <div className="rounded-lg bg-[color:var(--navy-deep)] p-8 text-white">
-            <h3 className="font-display text-2xl font-bold">Need Industry-Specific Solutions?</h3>
-            <p className="mt-2 text-sm text-white/75">Our experts are ready to help you find the right solutions for your business.</p>
-            <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
-              {expertHelp.map((e) => (
-                <div key={e.text} className="flex items-center gap-2">
-                  <e.icon className="h-4 w-4 text-[color:var(--gold)]" /> {e.text}
-                </div>
-              ))}
-            </div>
-          </div>
-          <form className="rounded-lg border border-black/5 bg-white p-7 shadow-sm lg:col-span-2">
-            <h3 className="font-display text-xl font-bold">REQUEST A QUOTE</h3>
-            <div className="mt-5 grid gap-4 md:grid-cols-2">
-              <Field label="Company Name *" placeholder="Enter company name" />
-              <Field label="Contact Person *" placeholder="Enter name" />
-              <Field label="Phone Number *" placeholder="Enter phone number" />
-              <Field label="Email *" placeholder="Enter email address" />
-              <div className="md:col-span-2">
-                <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-[color:var(--muted-foreground)]">Industry *</label>
-                <div className="relative">
-                  <select className="w-full appearance-none rounded-md border border-black/10 bg-white px-3 py-2.5 text-sm">
-                    <option>Select industry</option>
-                    {industries.map((i) => <option key={i.title}>{i.title}</option>)}
-                  </select>
-                  <ChevronDown className="pointer-events-none absolute right-3 top-3 h-4 w-4 text-[color:var(--muted-foreground)]" />
-                </div>
-              </div>
-              <div className="md:col-span-2">
-                <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-[color:var(--muted-foreground)]">Requirement Details *</label>
-                <textarea rows={4} placeholder="Tell us about your requirement..." className="w-full rounded-md border border-black/10 bg-white px-3 py-2.5 text-sm" />
-              </div>
-              <div className="md:col-span-2">
-                <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-[color:var(--muted-foreground)]">Upload BOQ / File</label>
-                <div className="flex items-center gap-3 rounded-md border border-dashed border-black/15 bg-[color:var(--secondary)] px-3 py-2.5 text-sm">
-                  <button type="button" className="rounded bg-white px-3 py-1 text-xs font-semibold shadow-sm">Choose File</button>
-                  <span className="text-xs text-[color:var(--muted-foreground)]">No file chosen</span>
-                </div>
-                <p className="mt-1 text-[11px] text-[color:var(--muted-foreground)]">Max file size: 10MB (PDF, DOC, XLS, DWG)</p>
-              </div>
-            </div>
-            <button type="button" className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[color:var(--gold)] px-5 py-3 text-sm font-bold text-[color:var(--navy-deep)] hover:brightness-105">
-              Submit Request <ArrowRight className="h-4 w-4" />
-            </button>
-          </form>
-        </div>
-      </section>
-
       <Footer />
     </div>
   );
@@ -360,13 +295,7 @@ function Footer() {
     <footer className="bg-[color:var(--navy-deep)] text-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-1">
-          <div className="flex items-center gap-3">
-            <div className="grid h-11 w-11 place-items-center rounded-md bg-[color:var(--gold)] font-display text-lg font-bold text-[color:var(--navy-deep)]">RR</div>
-            <div>
-              <div className="font-display text-sm font-bold">RR ENTERPRISES</div>
-              <div className="text-[10px] text-white/60">One Partner. Multiple Solutions. Endless Possibilities.</div>
-            </div>
-          </div>
+          <BrandLogo className="h-16" />
           <p className="mt-4 text-xs text-white/70">Your trusted partner for industrial procurement, infrastructure solutions and end-to-end supply growth.</p>
           <div className="mt-4 flex gap-2">
             {[Linkedin, Facebook, Instagram, Youtube].map((I, i) => (
@@ -398,7 +327,6 @@ function Footer() {
           <div className="flex items-center gap-4">
             <button className="flex items-center gap-1 rounded bg-[color:var(--gold)] px-3 py-1.5 text-[color:var(--navy-deep)]"><Phone className="h-3 w-3" /> Call</button>
             <button className="flex items-center gap-1 rounded bg-green-500 px-3 py-1.5"><MessageCircle className="h-3 w-3" /> WhatsApp</button>
-            <button className="flex items-center gap-1 rounded bg-white/10 px-3 py-1.5"><Handshake className="h-3 w-3" /> RFQ</button>
           </div>
         </div>
         <div className="mx-auto max-w-7xl px-6 pb-4 text-center text-[10px] text-white/40">© 2024 RR Enterprises. All Rights Reserved.</div>

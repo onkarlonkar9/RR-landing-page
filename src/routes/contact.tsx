@@ -9,7 +9,8 @@ import {
 
 import heroImg from "@/assets/contact-hero.jpg";
 import officePune from "@/assets/office-pune.jpg";
-import officeMumbai from "@/assets/office-mumbai.jpg";
+import { BrandLogo } from "@/components/brand-logo";
+import { SiteNav } from "@/components/site-nav";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -22,8 +23,6 @@ export const Route = createFileRoute("/contact")({
   }),
   component: ContactPage,
 });
-
-const nav = ["Home", "About Us", "Solutions", "Industries", "Projects", "Resources", "Contact"];
 
 const contactMethods = [
   { icon: Phone, title: "Call Us", sub: "Speak with our experts", value: "+91 98765 43210", extra: "Mon – Sat: 9AM – 6PM" },
@@ -46,7 +45,6 @@ const faqs = [
   "How quickly do you respond to inquiries?",
   "Can I upload my BOQ or technical drawings?",
   "Do you deliver across India?",
-  "Can I request multiple products in one RFQ?",
   "Do you provide site visits or technical support?",
 ];
 
@@ -58,20 +56,6 @@ const whyChoose = [
 ];
 
 const trusted = ["TATA", "Reliance", "LARSEN & TOUBRO", "adani", "JSW", "Mahindra"];
-
-function Logo({ light = false }: { light?: boolean }) {
-  return (
-    <div className="flex items-center gap-2">
-      <div className="flex h-11 w-11 items-center justify-center rounded-md border-2 border-gold bg-transparent">
-        <span className="font-display text-lg font-extrabold tracking-tight text-gold">RR</span>
-      </div>
-      <div>
-        <div className={`font-display text-sm font-bold leading-tight ${light ? "text-white" : "text-navy"}`}>RR ENTERPRISES</div>
-        <div className="text-[10px] leading-tight text-gold">One Partner. Multiple Solutions. Endless Possibilities.</div>
-      </div>
-    </div>
-  );
-}
 
 function GoldBtn({ children, outline = false, className = "" }: { children: React.ReactNode; outline?: boolean; className?: string }) {
   if (outline) {
@@ -114,22 +98,8 @@ function ContactPage() {
         </div>
 
         <div className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          <Link to="/"><Logo light /></Link>
-          <nav className="hidden items-center gap-7 text-sm text-white/90 lg:flex">
-            {nav.map((n) => {
-              const active = n === "Contact";
-              const cls = `transition hover:text-gold ${active ? "text-gold font-semibold border-b-2 border-gold pb-1" : ""}`;
-              if (n === "Home") return <Link key={n} to="/" className={cls}>{n}</Link>;
-              if (n === "About Us") return <Link key={n} to="/about" className={cls}>{n}</Link>;
-              if (n === "Solutions") return <Link key={n} to="/solutions" className={cls}>{n}</Link>;
-              if (n === "Industries") return <Link key={n} to="/industries" className={cls}>{n}</Link>;
-              if (n === "Contact") return <Link key={n} to="/contact" className={cls}>{n}</Link>;
-              return <a key={n} href="#" className={cls}>{n}{n === "Resources" && " ▾"}</a>;
-            })}
-          </nav>
-          <button className="inline-flex items-center gap-2 rounded-md bg-gold px-4 py-2.5 text-sm font-semibold text-navy-deep hover:bg-gold-soft">
-            Request Quote <ArrowRight className="h-4 w-4" />
-          </button>
+          <Link to="/"><BrandLogo /></Link>
+          <SiteNav active="Contact" />
         </div>
 
         <div className="relative z-10 mx-auto grid max-w-7xl gap-10 px-6 pt-6 pb-20 lg:grid-cols-2">
@@ -149,7 +119,6 @@ function ContactPage() {
               ))}
             </div>
             <div className="mt-7 flex flex-wrap gap-3">
-              <GoldBtn>Request Quote</GoldBtn>
               <GoldBtn outline><Calendar className="h-4 w-4" /> Schedule Consultation</GoldBtn>
             </div>
           </div>
@@ -224,7 +193,7 @@ function ContactPage() {
       {/* OFFICE LOCATIONS */}
       <section className="mx-auto max-w-7xl px-6 pb-16">
         <h2 className="font-display text-xl font-bold text-navy">Our Office Locations</h2>
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
+        <div className="mt-6 grid gap-6 md:grid-cols-1">
           {/* Pune */}
           <div className="overflow-hidden rounded-md border border-border bg-white shadow-sm">
             <div className="relative h-48">
@@ -242,34 +211,12 @@ function ContactPage() {
               <a href="#" className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-gold hover:underline">Get Directions <ArrowRight className="h-3 w-3" /></a>
             </div>
           </div>
-          {/* Mumbai */}
-          <div className="overflow-hidden rounded-md border border-border bg-white shadow-sm">
-            <div className="relative h-48">
-              <img src={officeMumbai} alt="Mumbai Office" className="h-full w-full object-cover" />
-              <span className="absolute right-3 top-3 rounded bg-gold px-2 py-1 text-[10px] font-bold text-navy-deep">Branch Office</span>
-            </div>
-            <div className="p-5">
-              <h3 className="font-display text-base font-bold text-navy">Mumbai Office</h3>
-              <ul className="mt-3 space-y-2 text-xs text-muted-foreground">
-                <li className="flex gap-2"><MapPin className="h-4 w-4 shrink-0 text-gold" /> Unit 501, Business Bay, Andheri East, Mumbai – 400093, Maharashtra, India</li>
-                <li className="flex gap-2"><Phone className="h-4 w-4 shrink-0 text-gold" /> +91 98765 43211</li>
-                <li className="flex gap-2"><Mail className="h-4 w-4 shrink-0 text-gold" /> mumbai@rrenterprises.com</li>
-                <li className="flex gap-2"><Clock className="h-4 w-4 shrink-0 text-gold" /> Mon – Sat: 9:00 AM – 6:00 PM</li>
-              </ul>
-              <a href="#" className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-gold hover:underline">Get Directions <ArrowRight className="h-3 w-3" /></a>
-            </div>
-          </div>
-        </div>
-        <div className="mt-6 text-center">
-          <button className="inline-flex items-center gap-2 rounded-md border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy shadow-sm hover:bg-secondary">
-            View All Locations <ArrowRight className="h-4 w-4" />
-          </button>
         </div>
       </section>
 
       {/* FORMS SECTION */}
       <section className="bg-secondary/40 py-16">
-        <div className="mx-auto grid max-w-7xl gap-8 px-6 lg:grid-cols-3">
+        <div className="mx-auto grid max-w-7xl gap-8 px-6 lg:grid-cols-2">
           {/* Left: Send Us a Message */}
           <div className="lg:col-span-1">
             <h3 className="font-display text-lg font-bold text-navy">Send Us a Message</h3>
@@ -335,7 +282,6 @@ function ContactPage() {
                 Start WhatsApp Chat <ArrowRight className="h-4 w-4" />
               </button>
               <div className="mt-4 flex gap-2">
-                <button className="flex-1 rounded border border-white/30 bg-white/10 py-2 text-[11px] font-semibold hover:bg-white/20">Request Quote</button>
                 <button className="flex-1 rounded border border-white/30 bg-white/10 py-2 text-[11px] font-semibold hover:bg-white/20">Track Order</button>
                 <button className="flex-1 rounded border border-white/30 bg-white/10 py-2 text-[11px] font-semibold hover:bg-white/20">Talk To Expert</button>
               </div>
@@ -357,68 +303,6 @@ function ContactPage() {
                   ))}
                 </tbody>
               </table>
-            </div>
-          </div>
-
-          {/* Right: Quick RFQ */}
-          <div className="rounded-md border border-border bg-white p-6 shadow-sm">
-            <h3 className="font-display text-lg font-bold text-navy">Quick RFQ</h3>
-            <p className="mt-1 text-xs text-muted-foreground">Submit your requirement for fast quotation.</p>
-            <form className="mt-5 space-y-4" onSubmit={(e) => e.preventDefault()}>
-              <div>
-                <label className="text-xs font-semibold text-navy">Company Name <span className="text-red-500">*</span></label>
-                <input type="text" placeholder="Enter company name" className="mt-1 w-full rounded border border-border bg-white px-3 py-2 text-xs" />
-              </div>
-              <div>
-                <label className="text-xs font-semibold text-navy">Industry <span className="text-red-500">*</span></label>
-                <select className="mt-1 w-full rounded border border-border bg-white px-3 py-2 text-xs text-muted-foreground">
-                  <option>Select industry</option>
-                  <option>Manufacturing</option>
-                  <option>Construction</option>
-                  <option>Logistics</option>
-                  <option>Infrastructure</option>
-                </select>
-              </div>
-              <div>
-                <label className="text-xs font-semibold text-navy">Requirement Type <span className="text-red-500">*</span></label>
-                <select className="mt-1 w-full rounded border border-border bg-white px-3 py-2 text-xs text-muted-foreground">
-                  <option>Select requirement type</option>
-                  <option>Product Supply</option>
-                  <option>Service</option>
-                  <option>Consultation</option>
-                </select>
-              </div>
-              <div>
-                <label className="text-xs font-semibold text-navy">Brief Requirement <span className="text-red-500">*</span></label>
-                <textarea rows={3} placeholder="Enter brief requirement" className="mt-1 w-full rounded border border-border bg-white px-3 py-2 text-xs" />
-              </div>
-              <div>
-                <label className="text-xs font-semibold text-navy">Upload BOQ / File</label>
-                <div className="mt-1 flex items-center gap-2 rounded border border-border bg-white px-3 py-2">
-                  <button type="button" className="text-xs font-semibold text-navy">Choose File</button>
-                  <span className="text-xs text-muted-foreground">No file chosen</span>
-                </div>
-              </div>
-              <button type="submit" className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-gold px-5 py-2.5 text-sm font-bold text-navy-deep hover:bg-gold-soft">
-                Submit RFQ <ArrowRight className="h-4 w-4" />
-              </button>
-            </form>
-
-            <div className="mt-6 space-y-3">
-              {[
-                { icon: Clock, title: "Quick Response", desc: "Within 2 business hours" },
-                { icon: Briefcase, title: "Expert Consultation", desc: "By industry specialists" },
-                { icon: Award, title: "Competitive Pricing", desc: "Best value guaranteed" },
-                { icon: MapPin, title: "Pan India Delivery", desc: "500+ locations" },
-              ].map((f) => (
-                <div key={f.title} className="flex items-center gap-3">
-                  <f.icon className="h-5 w-5 text-gold" strokeWidth={1.5} />
-                  <div>
-                    <div className="text-xs font-semibold text-navy">{f.title}</div>
-                    <div className="text-[10px] text-muted-foreground">{f.desc}</div>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </div>
@@ -517,7 +401,6 @@ function ContactPage() {
             <p className="text-sm text-white/75">Let's build something great together.</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <GoldBtn>Request Quote</GoldBtn>
             <GoldBtn outline>Talk To Our Experts</GoldBtn>
           </div>
         </div>
@@ -527,7 +410,7 @@ function ContactPage() {
       <footer className="bg-navy-deep pt-14 pb-6 text-white">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-1">
-            <Logo light />
+            <BrandLogo className="h-16" />
             <p className="mt-5 text-xs text-white/70">Your trusted partner for industrial procurement, infrastructure solutions and sustainable growth.</p>
             <div className="mt-4 flex gap-2">
               {[Linkedin, Facebook, Instagram, Youtube].map((I, i) => (
@@ -537,7 +420,7 @@ function ContactPage() {
           </div>
           <FooterCol title="SOLUTIONS" items={["Packaging Materials","Industrial Components","Construction Materials","PEB Structures","MEP Services","Solar Solutions"]} />
           <FooterCol title="INDUSTRIES" items={["Manufacturing","Warehousing","Logistics","Construction","Infrastructure","EPC Contractors"]} />
-          <FooterCol title="QUICK LINKS" items={["About Us","Projects","Resources","RFQ Portal","Vendor Portal","Contact Us"]} />
+          <FooterCol title="QUICK LINKS" items={["About Us","Projects","Resources","Vendor Portal","Contact Us"]} />
           <div>
             <h4 className="font-display text-sm font-bold text-white">CONTACT INFO</h4>
             <div className="mt-3 h-0.5 w-10 bg-gold" />
@@ -547,11 +430,6 @@ function ContactPage() {
               <li className="flex gap-2"><Mail className="h-4 w-4 flex-none text-gold" /> info@rrenterprises.com</li>
               <li className="flex gap-2"><Globe className="h-4 w-4 flex-none text-gold" /> www.rrenterprises.com</li>
             </ul>
-            <h4 className="mt-6 font-display text-sm font-bold text-white">NEWSLETTER</h4>
-            <div className="mt-3 h-0.5 w-10 bg-gold" />
-            <p className="mt-3 text-xs text-white/70">Stay updated with our latest solutions and insights.</p>
-            <input placeholder="Enter your email" className="mt-3 w-full rounded border border-white/20 bg-transparent px-3 py-2 text-xs" />
-            <button className="mt-2 w-full rounded bg-gold py-2 text-xs font-bold text-navy-deep hover:bg-gold-soft">Subscribe</button>
           </div>
         </div>
         <div className="mx-auto mt-10 flex max-w-7xl flex-col items-center justify-between gap-2 border-t border-white/10 px-6 pt-5 text-xs text-white/60 md:flex-row">
