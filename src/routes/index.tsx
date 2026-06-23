@@ -147,7 +147,7 @@ function Index() {
           <Logo light />
           <nav className="hidden items-center gap-7 text-sm text-white/90 lg:flex">
             {nav.map((n) => {
-              const to = n === "About Us" ? "/about" : n === "Solutions" ? "/solutions" : n === "Industries" ? "/industries" : null;
+              const to = n === "About Us" ? "/about" : n === "Solutions" ? "/solutions" : n === "Industries" ? "/industries" : n === "Contact" ? "/contact" : null;
               if (to) return <Link key={n} to={to} className="transition hover:text-gold">{n}</Link>;
               return <a key={n} href="#" className="transition hover:text-gold">{n}{n === "Resources" && " ▾"}</a>;
             })}

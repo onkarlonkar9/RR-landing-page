@@ -128,6 +128,7 @@ function SolutionsPage() {
               if (n === "About Us") return <Link key={n} to="/about" className={cls}>{n}</Link>;
               if (n === "Solutions") return <Link key={n} to="/solutions" className={cls}>{n}</Link>;
               if (n === "Industries") return <Link key={n} to="/industries" className={cls}>{n}</Link>;
+              if (n === "Contact") return <Link key={n} to="/contact" className={cls}>{n}</Link>;
               return <a key={n} href="#" className={cls}>{n}{n === "Resources" && " ▾"}</a>;
             })}
           </nav>

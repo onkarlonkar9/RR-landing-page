@@ -110,7 +110,7 @@ function About() {
           <Link to="/"><Logo light /></Link>
           <nav className="hidden items-center gap-7 text-sm text-white/90 lg:flex">
             {nav.map((n) => {
-              const to = n.label === "Solutions" ? "/solutions" : n.label === "Industries" ? "/industries" : n.label === "Home" ? "/" : null;
+              const to = n.label === "Solutions" ? "/solutions" : n.label === "Industries" ? "/industries" : n.label === "Home" ? "/" : n.label === "Contact" ? "/contact" : null;
               const cls = `transition hover:text-gold ${n.active ? "border-b-2 border-gold pb-1 text-gold" : ""}`;
               if (to) return <Link key={n.label} to={to} className={cls}>{n.label}</Link>;
               return <a key={n.label} href="#" className={cls}>{n.label}{n.caret && " ▾"}</a>;
